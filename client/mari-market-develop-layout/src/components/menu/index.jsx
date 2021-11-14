@@ -1,12 +1,15 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setRoute } from '../../redux/actions/route';
+
 import { withStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Button from '@mui/material/Button';
 
 import logo from '../../assets/image/logo.svg';
 
@@ -27,6 +30,11 @@ const styles = {
     '& button': {
       color: '#fff',
       margin: '0 20px'
+    },
+    '& a': {
+      width: '150px',
+      color: '#fff',
+      textDecoration: 'none'
     }
   },
   menuButtons: {
@@ -43,6 +51,12 @@ const styles = {
 }
 
 function Menu(props) {
+  const dispatch = useDispatch();
+  const { route } = useSelector(({ route }) => route);
+
+  const handlerClick = (route) => {
+    return dispatch(setRoute(route))
+  }
 
   const { isFilled, classes } = props;
 
@@ -50,20 +64,22 @@ function Menu(props) {
     <React.Fragment>
       <Grid
         className={classes.header}
-        style={{ backgroundColor: isFilled ? '#01392B' : 'none'}}
+        style={isFilled ? { backgroundColor: '#01392B', 'margin-bottom': 0 } : null}
         container
       >
         <Grid>
-          <IconButton title='Мари-маркет'>
-            <img src={logo} alt="" />
-          </IconButton>
+          <Link onClick={() => handlerClick('/')} to="/">
+            <IconButton title='Мари-маркет'>
+              <img src={logo} alt="" />
+            </IconButton>
+          </Link>
         </Grid>
         <Grid className={classes.menuLinks}>
-          <Button>Продукты</Button>
-          <Button>Фермеры</Button>
-          <Button>Доставка</Button>
-          <Button>Контакты</Button>
-          <Button>Стать продавцом</Button>
+          <Link onClick={() => handlerClick('catalog')} to="/catalog" style={route === 'catalog' ? { 'color': '#5e755d' } : null}>Продукты</Link>
+          <Link to="/">Фермеры</Link>
+          <Link to="/">Доставка</Link>
+          <Link to="/">Контакты</Link>
+          <Link to="/">Стать продавцом</Link>
         </Grid>
         <Grid className={classes.menuButtons}>
           <Tooltip title="Аккаунт">
@@ -78,7 +94,7 @@ function Menu(props) {
           </Tooltip>
         </Grid>
       </Grid>
-    </React.Fragment>
+    </React.Fragment >
   );
 }
 
