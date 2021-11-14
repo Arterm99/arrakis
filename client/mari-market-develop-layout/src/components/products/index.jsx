@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import Menu from './menu';
 import Search from './search';
 import Card from './card';
+import { flexbox } from "@mui/system";
+import { autocompleteClasses } from "@mui/material";
 
 const styles = {
   root: {
@@ -29,6 +31,15 @@ const styles = {
     width: '100%',
     marginLeft: '10px',
     marginTop: '40px'
+  },
+  items: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    '& > div': {
+      marginTop: '20px'
+    }
+
   }
 }
 
@@ -46,10 +57,14 @@ function Products(props) {
       </div>
       <div className={classes.secondBlock}>
         <Search />
-        <div>
-          {items.map((item) =>
+        <div className={classes.items}>
+          {items.map((item, index) =>
             <Card
+              key={index}
               img={item.profile_image}
+              company={item.company}
+              productName={item.name}
+              price={item.price}
             />
           )}
         </div>

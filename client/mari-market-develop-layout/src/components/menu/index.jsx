@@ -58,7 +58,16 @@ function Menu(props) {
     return dispatch(setRoute(route))
   }
 
-  const { isFilled, classes } = props;
+  const handlerClickOnAccBtn = () =>
+  {
+    handlerClick('/');
+    window.location.href = 'https://crotone.000webhostapp.com/';
+  }
+
+  const { 
+    isFilled, 
+    classes 
+  } = props;
 
   return (
     <React.Fragment>
@@ -83,7 +92,7 @@ function Menu(props) {
         </Grid>
         <Grid className={classes.menuButtons}>
           <Tooltip title="Аккаунт">
-            <IconButton >
+            <IconButton onClick={handlerClickOnAccBtn}>
               <PersonOutlineIcon />
             </IconButton>
           </Tooltip>
