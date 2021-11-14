@@ -63,8 +63,6 @@
 		reg();
 	} else {
 		echo "Вы, ".$_COOKIE['user']. ", уже вошли!<br \>"; 	?>
-			<h3> Что бы выйти, нажмите <a href="/30_my_test/validation-form/exit/exit.php"><b>Выход</b></h3> 
-			
 				
 <?php
 }
